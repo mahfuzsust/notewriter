@@ -4,6 +4,11 @@ Date.prototype.addDays = function(days) {
     return dat;
 }
 
+var toTimestamp = function (strDate){
+    var datum = Date.parse(strDate);
+    return datum/1000;
+ }
+
 function getServiceDateList() {
     let arr = [];
     arr.push(new Date().addDays(-1).toDateString());
@@ -19,5 +24,6 @@ function getCurrentDate() {
 
 export default {
     getCurrentDate: getCurrentDate,
-    getServiceDateList: getServiceDateList
+    getServiceDateList: getServiceDateList,
+    toTimestamp: toTimestamp
 };

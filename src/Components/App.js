@@ -15,6 +15,16 @@ class App extends React.Component {
         this.serviceDate = new Date();
         this.addPatient = this.addPatient.bind(this);
         this.switchDate = this.switchDate.bind(this);
+        this.saveNote = this.saveNote.bind(this);
+        this.selectPatient = this.selectPatient.bind(this);
+    }
+    selectPatient(patient) {
+        this.patient = patient;
+    }
+
+    saveNote() {
+        var content = window.CKEDITOR.instances["notewriter"].getData();
+        patients.saveNote(this.serviceDate, this.patient.id, content);
     }
   
     addPatient() {
@@ -51,12 +61,17 @@ class App extends React.Component {
             </div>
             <div className="row">
                 <div className="col-md-4">
-                    <PatientList items={this.state.patients} />
+                    <PatientList items={this.state.patients} selectPatient={this.selectPatient}/>
                 </div>
                 <div className="col-md-8">
                     <textarea name="notewriter" id="notewriter" rows="10" cols="80">
-                        This is my textarea to be replaced with CKEditor.
                     </textarea>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-9"></div>
+                <div className="col-md-3">
+                    <Button text="Save" click={this.saveNote}/>
                 </div>
             </div>
         </div>
