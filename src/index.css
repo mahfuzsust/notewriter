@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Crasns'; /*a name to be used later*/
+  src: url('fonts/Crasns.ttf'); /*URL to font*/
+}
+.num {
+  font-family: "Crasns";
+  font-size: 3em;
+}
