@@ -35,6 +35,8 @@ class App extends React.Component {
     }
 
     selectPatient(selectedPatient) {
+        selectedPatient.className = " selected";
+        this.selectedPatient.className = "";
         this.selectedPatient = selectedPatient;
         this.setState((prevState, props) => {
             return {patient: selectedPatient};
@@ -47,6 +49,8 @@ class App extends React.Component {
   
     addPatient() {
         var newPatient = patients.addPatient(this.serviceDate);
+        newPatient.className = " selected";
+        this.selectedPatient.className = "";
         this.selectedPatient = newPatient;
         this.setState((prevState, props) => {
             return {patient: newPatient};

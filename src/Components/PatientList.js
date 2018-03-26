@@ -13,9 +13,13 @@ function PatientList(props) {
         }
       }
 
-    const listItems = items.map((patient, i) =>
-        <li key={i} className="list-group-item" onClick={(e) => selectPatient(patient, e)}>{patient.name}</li>
-    );
+    const listItems = items.map((patient, i) => {
+        var className = "list-group-item";
+        if(patient.className) {
+            className += patient.className
+        }
+        return <li key={i} className={className} onClick={(e) => selectPatient(patient, e)}>{patient.name}</li>
+    });
     return(
         <ul className="list-group">{listItems}</ul>
     )
