@@ -11,20 +11,25 @@ class DateList extends React.Component {
         this.selectDate = this.selectDate.bind(this);
     }
 
-    selectDate(date, e) {
+    selectDate(item, e) {
+        item.className = " selected";
         this.setState(prevState => ({
-            name : date
+            name : item.date
         }));
         if(this.props.switchDate) {
-            this.props.switchDate(date);
+            this.props.switchDate(item.date);
         }
     }
 
     init(props) {
         var items = props.items;
-        this.listItems = items.map((item, i) => 
-            <li key={i} onClick={(e) => this.selectDate(item, e)}><a>{item}</a></li>
-        );
+        this.listItems = items.map((item, i) => {
+            var className = "list-group-item";
+            if(item.className) {
+                className += item.className
+            }
+            return <li key={i} className={className} onClick={(e) => this.selectDate(item, e)}>{item.date}</li>
+        });
     }
     render() {
         return(

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import DateList from './DateList';
 import PatientList from './PatientList';
 import TextField from './TextField';
@@ -92,12 +91,7 @@ class App extends React.Component {
                 <div className="col-md-8">
                     <textarea name="notewriter" id="notewriter" rows="10" cols="80">
                     </textarea>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-md-9"></div>
-                <div className="col-md-3">
-                    <Button text="Save" click={this.saveNote}/>
+                    <Button text="Save" click={this.saveNote} class="btn btn-success"/>
                 </div>
             </div>
         </div>

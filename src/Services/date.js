@@ -1,5 +1,5 @@
-Date.prototype.addDays = function(days) {
-    var dat = new Date(this.valueOf());
+var addDays = function(date, days) {
+    var dat = new Date(date);
     dat.setDate(dat.getDate() + days);
     return dat;
 }
@@ -11,11 +11,11 @@ var toTimestamp = function (strDate){
 
 function getServiceDateList() {
     let arr = [];
-    arr.push(new Date().addDays(-2).toDateString());
-    arr.push(new Date().addDays(-1).toDateString());
-    arr.push(new Date().toDateString());
-    arr.push(new Date().addDays(1).toDateString());
-    arr.push(new Date().addDays(2).toDateString());
+    arr.push({ date: addDays(new Date(), -2).toDateString()});
+    arr.push({ date: addDays(new Date(), -1).toDateString()});
+    arr.push({ date: new Date().toDateString()});
+    arr.push({ date: addDays(new Date(), 1).toDateString()});
+    arr.push({ date: addDays(new Date(), 2).toDateString()});
     return arr;
 }
 function getCurrentDate() {

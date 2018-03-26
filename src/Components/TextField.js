@@ -18,8 +18,8 @@ class TextField extends React.Component {
     }
     componentWillReceiveProps(nextProps) {
         this.setState(prevState => {
-            prevState.textValue = nextProps.value,
-            this.input.value = nextProps.value
+            prevState.textValue = nextProps.value;
+            this.input.value = nextProps.value;
         });
     }
     
