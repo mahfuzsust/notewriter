@@ -13,7 +13,7 @@ function getServiceDateList() {
     let arr = [];
     arr.push({ date: addDays(new Date(), -2).toDateString()});
     arr.push({ date: addDays(new Date(), -1).toDateString()});
-    arr.push({ date: new Date().toDateString()});
+    arr.push({ date: new Date().toDateString(), className: " selected"});
     arr.push({ date: addDays(new Date(), 1).toDateString()});
     arr.push({ date: addDays(new Date(), 2).toDateString()});
     return arr;

@@ -4,33 +4,27 @@ class DateList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name : props.name || "Dropdown"
+            name: props.name,
+            items: props.items,
+            selectedItem: {}
         };
+        this.state.selectedItem = this.state.items[2];
         this.props = props;
-        this.init(props);
         this.selectDate = this.selectDate.bind(this);
     }
 
     selectDate(item, e) {
         item.className = " selected";
-        this.setState(prevState => ({
-            name : item.date
-        }));
+        this.setState(prevState => {
+            prevState.name = item.date;
+            prevState.selectedItem.className = "";
+            prevState.selectedItem = item;
+        });
         if(this.props.switchDate) {
             this.props.switchDate(item.date);
         }
     }
 
-    init(props) {
-        var items = props.items;
-        this.listItems = items.map((item, i) => {
-            var className = "list-group-item";
-            if(item.className) {
-                className += item.className
-            }
-            return <li key={i} className={className} onClick={(e) => this.selectDate(item, e)}>{item.date}</li>
-        });
-    }
     render() {
         return(
             <div className="dropdown">
@@ -38,7 +32,15 @@ class DateList extends React.Component {
                     {this.state.name}
                     <span className="caret"></span>
                 </button>
-                <ul className="dropdown-menu">{this.listItems}</ul>
+                <ul className="dropdown-menu">
+                    {this.state.items.map((item, i) => {
+                        var className = "list-group-item";
+                        if(item.className) {
+                            className += item.className;
+                        }
+                        return <li key={i} className={className} onClick={(e) => this.selectDate(item, e)}>{item.date}</li>
+                    })}
+                </ul>
             </div>
         )
     }
