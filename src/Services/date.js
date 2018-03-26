@@ -11,8 +11,8 @@ var toTimestamp = function (strDate){
 
 function getServiceDateList() {
     let arr = [];
-    arr.push(new Date().addDays(-1).toDateString());
     arr.push(new Date().addDays(-2).toDateString());
+    arr.push(new Date().addDays(-1).toDateString());
     arr.push(new Date().toDateString());
     arr.push(new Date().addDays(1).toDateString());
     arr.push(new Date().addDays(2).toDateString());

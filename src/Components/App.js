@@ -2,36 +2,55 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import DateList from './DateList';
 import PatientList from './PatientList';
+import TextField from './TextField';
 import date from './../Services/date';
 import patients from './../Services/patient';
+import ckeditorLib from './../Services/ckeditorLib';
 import Button from './Button';
+
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            patients : patients.getPatients(new Date())
+            patients : patients.getPatients(new Date()),
+            patient : {},
+            name: ""
         };
         this.serviceDate = new Date();
+        this.selectedPatient = {};
+
         this.addPatient = this.addPatient.bind(this);
         this.switchDate = this.switchDate.bind(this);
         this.saveNote = this.saveNote.bind(this);
         this.selectPatient = this.selectPatient.bind(this);
+        this.savePatientName = this.savePatientName.bind(this);
     }
-    selectPatient(patient) {
-        this.patient = patient;
+    savePatientName(value) {
+        patients.savePatientName(this.serviceDate, this.selectedPatient.id, value);
+        this.setState((prevState, props) => {
+            prevState.patient.name = value;
+            return {patient: prevState.patient};
+        });
+    }
+
+    selectPatient(selectedPatient) {
+        this.selectedPatient = selectedPatient;
+        this.setState((prevState, props) => {
+            return {patient: selectedPatient};
+        });
     }
 
     saveNote() {
-        var content = window.CKEDITOR.instances["notewriter"].getData();
-        patients.saveNote(this.serviceDate, this.patient.id, content);
+        patients.saveNote(this.serviceDate, this.selectedPatient.id, ckeditorLib.getData());
     }
   
     addPatient() {
-        patients.addPatient(this.serviceDate);
-        this.setState(prevState => ({
-            patients : patients.getPatients(this.serviceDate)
-        }));
+        var newPatient = patients.addPatient(this.serviceDate);
+        this.selectedPatient = newPatient;
+        this.setState((prevState, props) => {
+            return {patient: newPatient};
+        });
     }
     switchDate(date) {
         this.serviceDate = new Date(date);
@@ -57,6 +76,9 @@ class App extends React.Component {
                 </div>
                 <div className="col-md-1">
                     <Button text="Add" click={this.addPatient}/>
+                </div>
+                <div className="col-md-6">
+                    <TextField type="text" placeholder="name" value={this.state.patient.name} submit={this.savePatientName}/>
                 </div>
             </div>
             <div className="row">

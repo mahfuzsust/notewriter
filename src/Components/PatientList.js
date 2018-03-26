@@ -1,4 +1,5 @@
 import React from 'react';
+import ckeditorLib from './../Services/ckeditorLib'
 
 function PatientList(props) {
     const items = props.items;
@@ -6,7 +7,7 @@ function PatientList(props) {
     function selectPatient(patient, e) {
         e.preventDefault();
 
-        window.CKEDITOR.instances["notewriter"].setData(patient.content);
+        ckeditorLib.setData(patient.content);
         if(props.selectPatient) {
             props.selectPatient(patient);
         }
